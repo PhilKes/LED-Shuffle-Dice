@@ -1,42 +1,73 @@
+int dataPin = 0;
+int clockPin = 3;
 
-
-void setup (){
+void setup () {
+  pinMode(clockPin, OUTPUT);
+  pinMode(dataPin, OUTPUT);
+  digitalWrite(dataPin, 0);
+  digitalWrite(clockPin, 0);
 }
 
-int dataPin=3;
-int clockPin=4;
 void loop()
 {
+  /*
   int i = 0;
   for (i = 1; i < 7; i++) {
     setLeds(i);
-      delay(2000);
-  }
- // delay(2000);
- // rollDice();
+    delay(2000);
+  }*/
+   delay(2000);
+   rollDice();
 }
-byte leds=0;
+byte leds = 0;
 void setLeds(int number) {
   if (number == 1) {
-    leds= B01000001;
+    leds = B10000001;
   }
   else if (number == 2) {
-    leds= B01000010;
+    leds = B10000010;
   }
   else if (number == 3) {
-    leds= B01000011;
+    leds = B10000011;
   }
   else if (number == 4) {
-    leds= B01000110;
+    leds = B10000110;
   }
   else if (number == 5) {
-    leds= B01000111;
+    leds = B10000111;
   }
   else if (number == 6) {
-    leds= B01001110;
+    leds = B10001110;
   }
+  shiftLeds(leds);
+}
 
-  shiftOut(dataPin, clockPin,LSBFIRST, 0);
+// the heart of the program
+void shiftLeds(byte dataOut) {
+  int i = 0;
+  int pinState;
+  digitalWrite(dataPin, 0);
+  digitalWrite(clockPin, 0);
+
+  for (i = 7; i >= 0; i--)  {
+    digitalWrite(clockPin, 0);
+    if ( dataOut & (1 << i) ) {
+      pinState = 1;
+    }
+    else {
+      pinState = 0;
+    }
+
+    digitalWrite(dataPin, pinState);
+    digitalWrite(clockPin, 1);
+    digitalWrite(dataPin, 0);
+  }
+  //stop shifting
+  digitalWrite(clockPin, 0);
+  //latch with dataPin
+  digitalWrite(dataPin, 1);
+  delay(10);
+  digitalWrite(dataPin, 0);
 }
 void rollDice() {
   setLeds( random(1, 7));
