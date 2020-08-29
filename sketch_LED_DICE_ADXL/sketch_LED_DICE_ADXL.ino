@@ -1,95 +1,109 @@
-#include <SparkFun_ADXL345.h>  
-int pinLeds1 = 3;
-int pinLeds2 = 2;
-int pinLeds3 = 5;
-int pinLeds4 = 4;
+// Attiny85 + 74HC595 + ADXL345
+#include <TinyWireM.h>
+#include <avr/power.h>
 
-long ran;
-int time = 2000;
+#define ROLL_THRESHOLD  16
 
-ADXL345 adxl = ADXL345(); //SDA A4,SCL A5
+float x, y, z;
+
+int dataPin = PB4;
+int clockPin = PB3;
+
+/*
+ * Attiny - 74hc595
+ * PB3 - SHCP (Clock)
+ * PB4 - DS (Data) + STCP (Latch)
+ * VCC - MR
+ * GND - OE
+ * 
+ * Attiny - ADXL345
+ * VCC - CS
+ * PB0 - SDA
+ * PB2 - SCL
+ */
+
+
 void setup ()
 {
-  Serial.begin(9600);                 // Start the serial terminal
-  Serial.println("SparkFun ADXL345 Accelerometer Hook Up Guide Example");
-  Serial.println();
-  
-  pinMode (pinLeds1, OUTPUT);
-  pinMode (pinLeds2, OUTPUT);
-  pinMode (pinLeds3, OUTPUT);
-  pinMode (pinLeds4, OUTPUT);
-  //randomSeed(analogRead(0));
-  adxlSetup();
+  pinMode(clockPin, OUTPUT);
+  pinMode(dataPin, OUTPUT);
+  digitalWrite(dataPin, 0);
+  digitalWrite(clockPin, 0);
+  randomSeed(analogRead(0));
+  // Setup ADXL345
+  adxl345_init();
+  setLeds(0);
 }
-void adxlSetup()
-{
-  adxl.powerOn();                     // Power on the ADXL345
-  adxl.setRangeSetting(4);           // Give the range settings
 
-  adxl.setSpiBit(0);                  // Configure the device to be in 4 wire SPI mode when set to '0' or 3 wire SPI mode when set to 1
+float X, Y, Z, totalAccel;
 
-  adxl.setActivityXYZ(1, 1, 1);       // Set to activate movement detection in the axes "adxl.setActivityXYZ(X, Y, Z);" (1 == ON, 0 == OFF)
-  adxl.setActivityThreshold(65);      // 62.5mg per increment   // Set activity   // Inactivity thresholds (0-255)
-
-  adxl.ActivityINT(1);
-
-  
-//attachInterrupt(digitalPinToInterrupt(interruptPin), ADXL_ISR, RISING);   // Attach Interrupt
-
-}
 void loop()
 {
-  
-  if(adxl.triggered(adxl.getInterruptSource(), ADXL345_ACTIVITY)){
-    //adxl.ActivityINT(0);
-    Serial.println("*** ACTIVITY ***"); 
-    delay(300);
-    rollDice();
-    delay(50);
-    while(adxl.triggered(adxl.getInterruptSource(), ADXL345_ACTIVITY))
-    {
-    }
 
+  //rollDice();
+  //delay(2000);
+
+  /* for (int i = 1; i < 7; i++) {
+     setLeds(i);
+     delay(2000);
+    }*/
+
+  X = 0;
+  Y = 0;
+  Z = 0;
+  for (int i = 0; i < 10; i++) {
+    readAccel(&x, &y, &z);
+    X += x;
+    Y += y;
+    Z += z;
+    delay(1);
   }
+  X /= 10;
+  Y /= 10;
+  Z /= 10;
+
+  totalAccel = sqrt(X * X + Y * Y + Z * Z);
+  if (totalAccel > ROLL_THRESHOLD) {
+    rollDice();
+    delay(2000);
+  }
+
 }
 
-void rollDice()
-{
-    ran = random(1, 7);
-    if (ran == 1){
-      digitalWrite (pinLeds1, HIGH);
-      delay (time);
-    }
-    if (ran == 2){
-      digitalWrite (pinLeds4, HIGH);
-      delay (time);
-    }
-    if (ran == 3){
-      digitalWrite (pinLeds4, HIGH);
-      digitalWrite (pinLeds1, HIGH);
-      delay (time);
-    }
-    if (ran == 4){
-      digitalWrite (pinLeds2, HIGH);
-      digitalWrite (pinLeds4, HIGH);
-      delay (time);
-    }
-    if (ran == 5){
-      digitalWrite (pinLeds1, HIGH);
-      digitalWrite (pinLeds2, HIGH);
-      digitalWrite (pinLeds4, HIGH);
-      delay (time);
-   }
-   if (ran == 6){
-      digitalWrite (pinLeds2, HIGH);
-      digitalWrite (pinLeds4, HIGH);
-      digitalWrite (pinLeds3, HIGH);
-      delay (time);
-   }
-  
-  digitalWrite (pinLeds1, LOW);
-  digitalWrite (pinLeds2, LOW);
-  digitalWrite (pinLeds3, LOW);
-  digitalWrite (pinLeds4, LOW);
+byte leds = 0;
+void setLeds(int number) {
+  if (number == 0) {
+    leds = 0;
+  }
+  else if (number == 1) {
+    leds = B00000001;
+  }
+  else if (number == 2) {
+    leds = B00000010;
+  }
+  else if (number == 3) {
+    leds = B00000011;
+  }
+  else if (number == 4) {
+    leds = B00000110;
+  }
+  else if (number == 5) {
+    leds = B00000111;
+  }
+  else if (number == 6) {
+    leds = B00001110;
+  }
+  //shiftLeds(leds);
+  shiftOut(dataPin, clockPin, MSBFIRST, leds);
+  digitalWrite(clockPin, 0);
+  //latch with dataPin
+  digitalWrite(dataPin, 0);
+  delay(10);
+  digitalWrite(dataPin, 1);
+  delay(10);
+  digitalWrite(dataPin, 0);
 }
 
+void rollDice() {
+  setLeds( random(1, 7));
+}
