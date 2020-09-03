@@ -1,3 +1,4 @@
+// https://github.com/PhilKes/LED_Roll_Dice
 // Attiny85 + 74HC595 + ADXL345
 #include <TinyWireM.h>
 #include <avr/power.h>
@@ -10,17 +11,17 @@ int dataPin = PB4;
 int clockPin = PB3;
 
 /*
- * Attiny - 74hc595
- * PB3 - SHCP (Clock)
- * PB4 - DS (Data) + STCP (Latch)
- * VCC - MR
- * GND - OE
- * 
- * Attiny - ADXL345
- * VCC - CS
- * PB0 - SDA
- * PB2 - SCL
- */
+   Attiny - 74hc595
+   PB3 - SHCP (Clock)
+   PB4 - DS (Data) + STCP (Latch)
+   VCC - MR
+   GND - OE
+
+   Attiny - ADXL345
+   VCC - CS
+   PB0 - SDA
+   PB2 - SCL
+*/
 
 
 void setup ()
@@ -64,8 +65,19 @@ void loop()
 
   totalAccel = sqrt(X * X + Y * Y + Z * Z);
   if (totalAccel > ROLL_THRESHOLD) {
+    delay(150);
+    // Shuffle Effect
+    int last = 1;
+    int next = 1;
+    for (int i = 0; i < 5; i++) {
+      while (next == last)
+        next = random(1, 7);
+      last = next;
+      setLeds(next);
+      delay(200);
+    }
     rollDice();
-    delay(2000);
+    delay(1700);
   }
 
 }

@@ -3,3 +3,11 @@ Länge:
 38,5mm + 2,4mm = 40,9mm
 Breite:
 38,0mm + 2,4mm = 40,4mm
+
+Switch:
+länge: 10mm
+breite: 5mm
+höhe: 5mm
+Abstand
+12mm zum BatterieLoch
+15mm Abstand AttinyLoch

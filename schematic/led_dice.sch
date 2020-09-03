@@ -6178,7 +6178,7 @@ Based on the following sources:
 <part name="BT1" library="SparkFun-Batteries" deviceset="BATTERY" device="-20MM_PTH"/>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="GND2" library="SparkFun" deviceset="GND" device=""/>
-<part name="JP1" library="SparkFun" deviceset="M08" device=""/>
+<part name="ADXL345" library="SparkFun" deviceset="M08" device=""/>
 <part name="GND4" library="SparkFun" deviceset="GND" device=""/>
 <part name="C1" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="025-024X044" package3d_urn="urn:adsk.eagle:package:26149/1" value="10nF"/>
 <part name="SUPPLY1" library="supply2" deviceset="VCC" device=""/>
@@ -6233,7 +6233,7 @@ Based on the following sources:
 <instance part="GND2" gate="1" x="38.1" y="2.54" smashed="yes" rot="R270">
 <attribute name="VALUE" x="35.56" y="5.08" size="1.778" layer="96" rot="R270"/>
 </instance>
-<instance part="JP1" gate="G$1" x="45.72" y="-17.78" smashed="yes" rot="R180">
+<instance part="ADXL345" gate="G$1" x="45.72" y="-17.78" smashed="yes" rot="R180">
 <attribute name="VALUE" x="50.8" y="-5.08" size="1.778" layer="96" rot="R180"/>
 <attribute name="NAME" x="50.8" y="-31.242" size="1.778" layer="95" rot="R180"/>
 </instance>
@@ -6266,7 +6266,7 @@ Based on the following sources:
 <segment>
 <pinref part="GND2" gate="1" pin="GND"/>
 <wire x1="40.64" y1="-10.16" x2="38.1" y2="-10.16" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="1"/>
+<pinref part="ADXL345" gate="G$1" pin="1"/>
 <label x="38.1" y="-10.16" size="1.27" layer="95" rot="R180" xref="yes"/>
 <wire x1="40.64" y1="2.54" x2="40.64" y2="-10.16" width="0.1524" layer="91"/>
 <junction x="40.64" y="-10.16"/>
@@ -6327,14 +6327,14 @@ Based on the following sources:
 <net name="INT2" class="0">
 <segment>
 <wire x1="40.64" y1="-20.32" x2="38.1" y2="-20.32" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="5"/>
+<pinref part="ADXL345" gate="G$1" pin="5"/>
 <label x="38.1" y="-20.32" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="INT1" class="0">
 <segment>
 <wire x1="40.64" y1="-17.78" x2="38.1" y2="-17.78" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="4"/>
+<pinref part="ADXL345" gate="G$1" pin="4"/>
 <label x="38.1" y="-17.78" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
@@ -6348,12 +6348,12 @@ Based on the following sources:
 <pinref part="SUPPLY1" gate="G$1" pin="VCC"/>
 <pinref part="SV1" gate="G$1" pin="1"/>
 <wire x1="-20.32" y1="43.18" x2="-17.78" y2="43.18" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="2"/>
+<pinref part="ADXL345" gate="G$1" pin="2"/>
 <wire x1="40.64" y1="-12.7" x2="22.86" y2="-12.7" width="0.1524" layer="91"/>
 <wire x1="22.86" y1="-12.7" x2="-17.78" y2="-12.7" width="0.1524" layer="91"/>
 <wire x1="-17.78" y1="-12.7" x2="-17.78" y2="35.56" width="0.1524" layer="91"/>
 <label x="38.1" y="-12.7" size="1.27" layer="95" rot="R180" xref="yes"/>
-<pinref part="JP1" gate="G$1" pin="3"/>
+<pinref part="ADXL345" gate="G$1" pin="3"/>
 <label x="38.1" y="-15.24" size="1.27" layer="95" rot="R180" xref="yes"/>
 <wire x1="40.64" y1="-15.24" x2="22.86" y2="-15.24" width="0.1524" layer="91"/>
 <wire x1="22.86" y1="-15.24" x2="22.86" y2="-12.7" width="0.1524" layer="91"/>
@@ -6460,7 +6460,7 @@ Based on the following sources:
 <net name="SCL" class="0">
 <segment>
 <wire x1="40.64" y1="-27.94" x2="38.1" y2="-27.94" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="8"/>
+<pinref part="ADXL345" gate="G$1" pin="8"/>
 <label x="38.1" y="-27.94" size="1.27" layer="95" rot="R180" xref="yes"/>
 <wire x1="40.64" y1="-27.94" x2="27.94" y2="-27.94" width="0.1524" layer="91"/>
 <wire x1="27.94" y1="-27.94" x2="27.94" y2="27.94" width="0.1524" layer="91"/>
@@ -6474,7 +6474,7 @@ Based on the following sources:
 </net>
 <net name="SDA" class="0">
 <segment>
-<pinref part="JP1" gate="G$1" pin="7"/>
+<pinref part="ADXL345" gate="G$1" pin="7"/>
 <label x="38.1" y="-22.86" size="1.27" layer="95" rot="R180" xref="yes"/>
 <label x="38.1" y="-25.4" size="1.27" layer="95" rot="R180" xref="yes"/>
 <wire x1="40.64" y1="-25.4" x2="25.4" y2="-25.4" width="0.1524" layer="91"/>
@@ -6489,7 +6489,7 @@ Based on the following sources:
 </net>
 <net name="N$10" class="0">
 <segment>
-<pinref part="JP1" gate="G$1" pin="6"/>
+<pinref part="ADXL345" gate="G$1" pin="6"/>
 <wire x1="40.64" y1="-22.86" x2="38.1" y2="-22.86" width="0.1524" layer="91"/>
 </segment>
 </net>
