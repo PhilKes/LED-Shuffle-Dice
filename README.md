@@ -6,7 +6,7 @@
 * Coin Cell Battery + Holder
 * ADXL345 Accelerometer
 #### Schematic
-![3D Case](./doc/schematic.png)
+![Schematic](./doc/schematic.PNG)
 * Minimal I/O Pins required (in total: 4)
 * 2 Pin Connection to Shiftregister (CLK and DATA to **Attiny85** + LATCH connected to DATA)
 * Accelerometer for Shake Detection
