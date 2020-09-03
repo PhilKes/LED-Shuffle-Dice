@@ -1,8 +1,13 @@
 Case
 Länge:
-38,5mm + 2,4mm = 40,9mm
+43,9mm
 Breite:
-38,0mm + 2,4mm = 40,4mm
+40,40mm
+Wand Dicke: 1,6mm
+
+Platine:
+Länge: 40mm (38.5)
+breite: 36.5mm (38)
 
 Switch:
 länge: 10mm
