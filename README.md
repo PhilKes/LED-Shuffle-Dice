@@ -16,12 +16,7 @@
 
 
 #### 3D Printed Case
-
-##### Fusion 360 Model
-![3D Case](./doc/case.png)
-
-
-##### Printed Model
-![3D Case Print](./doc/case_print.jpeg)
-
-<img src="/doc/shuffle.gif" width="400px" >
+<p>
+  <img src="/doc/case.png" width="360px" >
+  <img src="/doc/shuffle.gif" width="360px" >
+</p>
