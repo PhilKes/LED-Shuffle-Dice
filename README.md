@@ -17,6 +17,6 @@
 
 #### 3D Printed Case
 <p>
-  <img src="/doc/case.png" width="360px" >
-  <img src="/doc/shuffle.gif" width="360px" >
+  <img src="/doc/case.png" width="340px" >
+  <img src="/doc/shuffle.gif" width="340px" >
 </p>
