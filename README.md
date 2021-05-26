@@ -1,6 +1,7 @@
-# LED Roll Dice
+# LED Shuffle Dice
 ### Attiny85 with Shiftregister and Accelerometer
 #### Parts
+* Attiny85 Microcontroller
 * **74HC595** Shiftregister
 * 7 **Red LEDs**
 * Coin Cell Battery + Holder
@@ -12,5 +13,15 @@
 * Accelerometer for Shake Detection
 * "Shuffle" Animation
 * LEDs logically connected in Pairs
+
+
 #### 3D Printed Case
+
+##### Fusion 360 Model
 ![3D Case](./doc/case.png)
+
+
+##### Printed Model
+![3D Case Print](./doc/case_print.jpeg)
+
+<img src="/doc/shuffle.gif" width="400px" >
